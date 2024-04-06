@@ -198,7 +198,7 @@ headers = {
 We are also preparing the headers in JSON format so its readable for the server.
 
 ### Response
-Now in this last step we are making a response to the server and afterwards it checks if you have acces or not, if you do then it will say in the console: "Email send successfully" and gives you an Email.
+Now in this last step we are making a response to the server and afterwards it checks if you have acces or not, if you do then it will say in the console: "Email sent successfully" and gives you an Email.
 ```
 # Making the request
 response = requests.get('https://api.bitget.com' + requestPath, headers=headers)
@@ -239,3 +239,8 @@ if response.status_code == 200:
 else:
     print("Error:", response.status_code, response.text)
 ```
+Now this was the quick runthrough of the code lets look at the preparation next.
+
+## Preparation for running the script
+### RasberryPi
+If you have a working VM or a RasberryPi then you can run this script from there. In our case we used a RasberryPi. You have to plug it in via LAN and also to some source of electricity. After the light is shining you can check if it is configured through a IP scanner.
