@@ -242,5 +242,53 @@ else:
 Now this was the quick runthrough of the code lets look at the preparation next.
 
 ## Preparation for running the script
-### RasberryPi
+### Config RasberryPi to internet
 If you have a working VM or a RasberryPi then you can run this script from there. In our case we used a RasberryPi. You have to plug it in via LAN and also to some source of electricity. After the light is shining you can check if it is configured through a IP scanner.
+
+![Screenshot 2024-04-06 133721](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/0f0d583c-bf34-4a91-8a37-5f8e613ec35b)
+
+As you can see we are connected.
+
+### CMD
+Now open cmd and type in:
+```
+ssh pi@karol.home
+```
+
+![Screenshot 2024-04-06 134231](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/70a4208c-238b-42e8-bad2-bd77459622ff)
+
+Make sure you use the name that you got from the IP scanner.
+Now there will be a field where it asks you for your password so put it in.
+
+![Screenshot 2024-04-06 134244](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/e001f455-86dc-464a-bf2a-08a2137b1a13)
+
+Afterwards you should be ready to go!
+
+### Config the timestamp
+Now before we run the script we have to configure the timestamp so we dont get errors. We will do it by giving the RasberryPi these two commands:
+```
+sudo apt-get install ntp
+sudo service ntp restart
+```
+
+![Screenshot 2024-04-06 134551](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/de982046-ac0a-4763-af42-d03bba6468fe)
+
+This will configure the timestamp how it should be.
+
+### Running the script
+Now we are ready to run the script. You have use this command:
+
+´´´
+python BitgetWallet.py
+´´´
+
+if you do not have the file yet, create one and go further.
+Now since you have runned the script, you can see that the email was sent successfully.
+
+![Screenshot 2024-04-06 134932](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/b1edaff5-c986-4fd2-9422-b43bb8701255)
+
+Then you will get an email and youre good to go!
+
+![Screenshot 2024-04-06 134947](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/eaecd808-8a7c-4216-8658-afdb5d37a099)
+
+![Screenshot 2024-04-06 134959](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/19a30068-9f45-429f-bec6-77a3884e7521)
