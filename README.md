@@ -142,7 +142,6 @@ These are classes from the email.mime module that allow you to create multipart 
 These credentials look different in my code and we have to use these placeholders for safety reasons.
 As you can see in the code you have to put in your API-key, secret-key and passphrase. We were really struggeling with getting this right but eventually we did.
 ```
-# Your API credentials
 api_key = '_______________________________'
 secret_key = '_______________________________________'
 passphrase = '________________'
@@ -150,3 +149,93 @@ passphrase = '________________'
 ![Screenshot 2024-04-06 123624](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/c1cfe4b4-a75e-4c8a-9a1b-f2a264a48261)
 
 Here is also an image of what I had to do on bitget. This is an API-adress I created.
+### Email config
+In this part we have set up the email which recives the mail and the one which sends it. We also had to manage the security part on google and had to get a code which alows us to use our gmail in this script.
+```
+sender_email = "krawieckarol9@gmail.com"
+sender_password = "fkcj xcea zbya xack"
+recipient_email = "krawieckarol9@gmail.com"
+```
+
+### API endpoint
+With this next part we are getting the endpoint of my assets. We got this from bitget it self, because they are offering alot of these endpoint to people who programm trading bots.
+```
+method = 'GET'
+requestPath = '/api/spot/v1/account/assets'
+```
+
+### Timestamp
+In the next lines we configured the timestamp that it matches the current balance. We have to do this because of the fact that the balance can change anytime because of the market.
+```
+# Function to generate timestamp
+def generate_timestamp():
+    return str(int(time.time() * 1000))
+
+# Generate timestamp
+timestamp = generate_timestamp()
+
+# Creating the string to be signed
+message = timestamp + method + requestPath
+
+# Encrypting the string with HMAC SHA256
+signature = hmac.new(secret_key.encode(), message.encode(), hashlib.sha256).digest()
+```
+In these steps we are also preparing the signature to send as a request to the server.
+
+### Signature
+In this step we are doing the signature which we will use to get the needed access to my wallet.
+```
+signature_b64 = base64.b64encode(signature).decode()
+
+headers = {
+    'ACCESS-KEY': api_key,
+    'ACCESS-SIGN': signature_b64,
+    'ACCESS-TIMESTAMP': timestamp,
+    'ACCESS-PASSPHRASE': passphrase,
+    'Content-Type': 'application/json'
+}
+```
+We are also preparing the headers in JSON format so its readable for the server.
+
+### Response
+Now in this last step we are making a response to the server and afterwards it checks if you have acces or not, if you do then it will say in the console: "Email send successfully" and gives you an Email.
+```
+# Making the request
+response = requests.get('https://api.bitget.com' + requestPath, headers=headers)
+
+# Checking response
+if response.status_code == 200:
+    balance_info = json.dumps(response.json(), indent=4)
+
+    # Email content
+    subject = "Balance Information"
+    body = balance_info
+
+    # Create message container - the correct MIME type is multipart/alternative
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = subject
+
+    # Attach body to the email
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        # Create SMTP session for sending the mail
+        smtp_server = "smtp.gmail.com"
+        smtp_port = 587
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        # Login with your credentials
+        server.login(sender_email, sender_password)
+        # Send the message via the server
+        server.sendmail(sender_email, recipient_email, msg.as_string())
+        print("Email sent successfully!")
+    except Exception as e:
+        print("Failed to send email. Error:", str(e))
+    finally:
+        # Close the SMTP server session
+        server.quit()
+else:
+    print("Error:", response.status_code, response.text)
+```
