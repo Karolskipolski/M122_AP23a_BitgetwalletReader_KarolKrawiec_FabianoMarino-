@@ -97,3 +97,6 @@ if response.status_code == 200:
 else:
     print("Error:", response.status_code, response.text)
 ```
+so what this code does is that it searches up my Bitgetwallets spotaccount and then gives me my balance of every single coin in JSON format via mail.
+
+But because it is a lot of code, we should break it up so you can understand more of it.
