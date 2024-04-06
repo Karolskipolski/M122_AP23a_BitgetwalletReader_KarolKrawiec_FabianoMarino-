@@ -2,12 +2,12 @@
 ## Bitgetwallet project
 In this project we will show you everything to our little Bitgetwalletreader.
 
-### Systemdesign
+## Systemdesign
 ![Screenshot 2024-04-06 103111](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/e2e86948-78ac-4a63-bb2d-33dd8293c4ac)
 
-### Code
+## Code
 Here you can see the code that we have done:
-```Python
+```
 
 import requests
 import hmac
@@ -100,3 +100,39 @@ else:
 so what this code does is that it searches up my Bitgetwallets spotaccount and then gives me my balance of every single coin in JSON format via mail.
 
 But because it is a lot of code, we should break it up so you can understand more of it.
+
+### Imports
+So as you can see we have some imports so lets go through every single one of them:
+```
+import requests
+```
+This library allows you to send HTTP requests easily.
+```
+import hmac
+```
+This module provides functions for generating keyed hashes of messages using the HMAC algorithm.
+```
+import hashlib
+```
+This module provides a common interface to many secure hash and message digest algorithms.
+```
+import time
+```
+This module provides various time-related functions.
+```
+import json
+```
+This module allows you to work with JSON (JavaScript Object Notation) data.
+```
+import base64
+```
+This module provides functions to encode and decode data using Base64 encoding.
+```
+import smtplib
+```
+This module defines an SMTP client session object that can be used to send mail to any internet machine with an SMTP or ESMTP listener daemon.
+```
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+```
+These are classes from the email.mime module that allow you to create multipart email messages with text and attachments.
