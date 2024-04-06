@@ -19,10 +19,10 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-# Your API credentials
-api_key = 'bg_c93715923a938f8e3d2711b65b7b7b4a'
-secret_key = '7ab06f7afa2f0c4edaa868f2ea8c4b4eee678f41a9828f75565b5832eb3e27b4'
-passphrase = 'BitcoinToTheMoon'
+# API credentials
+api_key = '_______________________________'
+secret_key = '_______________________________________'
+passphrase = '________________'
 
 # Email credentials
 sender_email = "krawieckarol9@gmail.com"
@@ -136,3 +136,17 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 ```
 These are classes from the email.mime module that allow you to create multipart email messages with text and attachments.
+
+### API credentials
+#### Quick reminder!
+These credentials look different in my code and we have to use these placeholders for safety reasons.
+As you can see in the code you have to put in your API-key, secret-key and passphrase. We were really struggeling with getting this right but eventually we did.
+```
+# Your API credentials
+api_key = '_______________________________'
+secret_key = '_______________________________________'
+passphrase = '________________'
+```
+![Screenshot 2024-04-06 123624](https://github.com/Karolskipolski/BitgetWalletScriptproject/assets/142780585/c1cfe4b4-a75e-4c8a-9a1b-f2a264a48261)
+
+Here is also an image of what I had to do on bitget. This is an API-adress I created.
