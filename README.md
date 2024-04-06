@@ -7,7 +7,7 @@ In this project we will show you everything to our little Bitgetwalletreader.
 
 ### Code
 Here you can see the code that we have done:
-'''Python
+```Python
 
 import requests
 import hmac
@@ -96,4 +96,4 @@ if response.status_code == 200:
         server.quit()
 else:
     print("Error:", response.status_code, response.text)
-'''
+```
