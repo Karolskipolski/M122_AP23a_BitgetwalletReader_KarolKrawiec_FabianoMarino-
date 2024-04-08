@@ -152,6 +152,10 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 ```
 These are classes from the email.mime module that allow you to create multipart email messages with text and attachments.
+```
+import schedule
+```
+This import works kind of like cronjob. You can set a timer in it.
 
 ### API credentials
 #### Quick reminder!
@@ -214,7 +218,7 @@ headers = {
 We are also preparing the headers in JSON format so its readable for the server.
 
 ### Response
-Now in this last step we are making a response to the server and afterwards it checks if you have acces or not, if you do then it will say in the console: "Email sent successfully" and gives you an Email.
+Now in this step we are making a response to the server and afterwards it checks if you have acces or not, if you do then it will say in the console: "Email sent successfully" and gives you an Email.
 ```
 # Making the request
 response = requests.get('https://api.bitget.com' + requestPath, headers=headers)
@@ -254,6 +258,18 @@ if response.status_code == 200:
         server.quit()
 else:
     print("Error:", response.status_code, response.text)
+```
+
+### Schedule (cronjob)
+This is the last part of the script and we used the schedule to make the program send an email every 5 minutes.
+```
+# Schedule the email to be sent every 5 minutes
+schedule.every(5).minutes.do(send_email)
+
+# Infinite loop to run the scheduler
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 ```
 Now this was the quick runthrough of the code lets look at the preparation next.
 
